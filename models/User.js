@@ -3,18 +3,14 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
   email: { type: String, unique: true },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
 
-  facebook: String,
-  twitter: String,
-  google: String,
-  github: String,
-  instagram: String,
-  linkedin: String,
-  steam: String,
   tokens: Array,
 
   profile: {
@@ -23,6 +19,11 @@ const userSchema = new mongoose.Schema({
     location: String,
     website: String,
     picture: String
+  },
+  role: {
+    type: String,
+    enum: ['superAdmin', 'admin', 'pm', 'reviewer', 'msh', 'none'],
+    default: 'none'
   }
 }, { timestamps: true });
 
