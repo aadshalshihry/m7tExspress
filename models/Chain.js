@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 const chainSchema = new mongoose.Schema({
   name: { type: String, unique: true },
   email: { type: String, unique: true },
+
+  overall_rate: { type: Number, default: 0},
+  stars: { type: Number, default: 0},
+
   address: { type: Schema.Types.ObjectId, ref: 'Address' },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 }, { timestamps: true });
