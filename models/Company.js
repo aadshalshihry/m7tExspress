@@ -1,3 +1,11 @@
+/**
+ * Author: Abdulrahman Alshehri
+ * Company schema
+ * @type {Mongoose}
+ *
+ * Todo:
+ *    1. Add Slug to company model
+ */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -10,8 +18,13 @@ const companySchema = new mongoose.Schema({
   best_chain: { type: Schema.Types.ObjectId, ref: 'Chain' },
   stars: { type: Number, default: 0},
 
+  location: {
+    address: String,
+    lat: String,
+    lan: String
+  },
+
   chains: [{ type: Schema.Types.ObjectId, ref: 'Chain' }],
-  address: { type: Schema.Types.ObjectId, ref: 'Address' },
   reviewer: { type: Schema.Types.ObjectId, ref: 'User' },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 

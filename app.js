@@ -31,6 +31,7 @@ dotenv.config({ path: '.env' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const companyController = require('./controllers/company');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -146,9 +147,19 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 /**
+ * Company Routes
+ */
+app.get('/company/index', passportConfig.isAuthenticated, companyController.companyIndex);
+app.get('/company/create', passportConfig.isAuthenticated, companyController.companyCreatePage);
+app.post('/company/store', passportConfig.isAuthenticated, upload.single('logo'), companyController.companyStore);
+
+/**
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
+app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
+app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+
 app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/nyt', apiController.getNewYorkTimes);
 app.get('/api/steam', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getSteam);
@@ -170,8 +181,6 @@ app.get('/api/paypal', apiController.getPayPal);
 app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
-app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/here-maps', apiController.getHereMaps);

@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    h1 page #{title}
+
+    hr
+
+    div
+        a(href='create')
+            button.btn.btn-primary(type='button') Add Company
+
+    br
+
+    table.table.table-dark
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') Name
+                th(scope='col') Email
+                th(scope='col') logo
+                th(scope='col') Rate
+                th(scope='col') Best Chain
+                th(scope='col') Stars
+        tbody
+            if companies.length === 0
+                tr
+                    th No Company
+            else
+                each company, index in companies
+                    tr
+                        th(scope='row') #{index}
+                        td #{company.name}
+                        td #{company.email}
+                        td #{company.logo}
+                        td #{company.overall_rate}
+                        td #{company.best_chain}
+                        td #{company.stars}
+
+
+
