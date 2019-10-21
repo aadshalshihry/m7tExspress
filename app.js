@@ -31,7 +31,7 @@ dotenv.config({ path: '.env' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const companyController = require('./controllers/company');
+// const companyController = require('./controllers/company');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -149,9 +149,11 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * Company Routes
  */
-app.get('/company/index', passportConfig.isAuthenticated, companyController.companyIndex);
-app.get('/company/create', passportConfig.isAuthenticated, companyController.companyCreatePage);
-app.post('/company/store', passportConfig.isAuthenticated, upload.single('logo'), companyController.companyStore);
+// app.get('/company/index', passportConfig.isAuthenticated, companyController.companyIndex);
+// app.get('/company/create', passportConfig.isAuthenticated, companyController.companyCreatePage);
+// app.post('/company/store', passportConfig.isAuthenticated, upload.single('logo'), companyController.companyStore);
+
+require('./routes/company_route.js')(app, upload);
 
 /**
  * API examples routes.

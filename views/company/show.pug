@@ -2,3 +2,35 @@ extends ../layout
 
 block content
     h1 Show Company page #{title}
+    ul
+        li #{company.name}
+        li #{company.email}
+        li #{company.slug}
+        li #{company.createdAt}
+
+        form(action='store' method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+                label(for='companyInputName') Name
+                input#companyInputName.form-control(type='text' name='name' aria-describedby='nameHelp' placeholder='Enter Company Name')
+                small#nameHelp.form-text.text-muted Google
+            .form-group
+                label(for='exampleInputEmail1') Email address
+                input#exampleInputEmail1.form-control(type='email' name='email' aria-describedby='emailHelp' placeholder='Enter email')
+                small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+            //.form-group
+            //    form(enctype='multipart/form-data', id='companyForm')
+            //        input(type='hidden', name='_csrf', value=_csrf)
+            //        .form-group
+            //            label.col-form-label.font-weight-bold File Input
+            //            .col-md-6
+            //                input(type='file', name='myFile', id='companLogo')
+            .form-group
+                label(for='inputAdress') Location
+                input#inputAdress.form-control(type='text' name='address' aria-describedby='addressHelp' placeholder='Enter Company Name')
+                small#addressHelp.form-text.text-muted 1234 Main St,
+
+            .form-group.form-check
+                input#exampleCheck1.form-check-input(type='checkbox')
+                label.form-check-label(for='exampleCheck1') Check me out
+            button.btn.btn-primary(type='submit') Create

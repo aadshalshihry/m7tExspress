@@ -13,13 +13,34 @@ const Company = require('../models/Company');
  * GET /company/index
  * Company Home page.
  */
-exports.companyIndex = (req, res) => {
-  Company.find({}, (err, companies) => {
+exports.companyIndex = async (req, res, next) => {
+  try {
+    const companies = await Company.find({}).populate();
+    console.log('companies', companies);
     res.render('company/index', {
       title: 'Company Index',
       companies
     });
-  });
+  } catch (e) {
+    return next(e);
+  }
+};
+
+/**
+ * Get /company/show/:slug
+ * Company Show page
+ */
+exports.companyShowPage = async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+    const company = await Company.findOne({ slug });
+    res.render('company/show', {
+      title: 'Company Show Page',
+      company
+    });
+  } catch (e) {
+    return next(e);
+  }
 };
 
 /**

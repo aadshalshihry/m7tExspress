@@ -8,6 +8,9 @@
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongooseSlugPlugin = require('mongoose-slug-plugin');
+const User = require('../models/User');
+const Chain = require('../models/Chain');
 
 const companySchema = new mongoose.Schema({
   name: { type: String, unique: true },
@@ -30,7 +33,6 @@ const companySchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+companySchema.plugin(mongooseSlugPlugin, { tmpl: '<%=name%>' });
 
-const Company = mongoose.model('Company', companySchema);
-
-module.exports = Company;
+module.exports = mongoose.model('Company', companySchema);
