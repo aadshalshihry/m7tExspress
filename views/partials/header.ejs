@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4DA5F4">
+  <meta name="csrf-token">
+  <title> - Hackathon Starter</title>
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+<div class="navbar navbar-light fixed-top navbar-expand-lg">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <i class="fas fa-cube">Project name</i>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target='.navbar-collapse'>
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/api" class="nav-link">API Examples</a>
+        </li>
+        <li class="nav-item">
+          <a href="/contact" class="nav-link">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a href="/status" class="nav-link">Status</a>
+        </li>
+
+      </ul>
+    </div>
+
+    <ul class="nav navbar-nav ml-auto">
+      <% if (!user) { %>
+        <li class="nav-item">
+          <a href="/login" class="nav-link">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/signup" class="nav-link">Create Account</a>
+        </li>
+      <% } else { %>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle='dropdown'>
+              <% if (user.profile.picture) { %>
+                <img src="<%= user.profile.picture%>">
+              <% } else { %>
+                  <img src="<%=  user.gravatar(60) %>" alt="">
+              <% } %>
+              <span> <%= user.profile.name || user.email || user.id %></span>
+              <i class="caret"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="/account">My Account</a>
+              </li>
+              <li class="divider dropdown-item"></li>
+              <li class="dropdown-item">
+                <a href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
